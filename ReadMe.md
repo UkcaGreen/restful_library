@@ -10,7 +10,7 @@ A FastAPI application with RESTful API endpoints for managing library operations
 
 ### application
 
-- first source environment variables from the `.env`, (`.env` file provided in this repository is just an example, please change it according to your needs)
+- first source environment variables from the `.env`, (an `.example_env` file provided in this repository, even though it is ready to use, please change it according to your needs)
 
     `source .env`
 

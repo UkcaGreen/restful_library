@@ -1,0 +1,14 @@
+ENV=development # "development", "staging", "production"
+
+FROM_EMAIL="library_case_study@outlook.com"
+FROM_EMAIL_PASSWORD="XQXy=heq)_&3rGk"
+
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=pass
+POSTGRES_DB=mydb
+POSTGRES_HOST=db
+
+DATABASE_URI=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}
+
+API_USERNAME=admin
+API_PASSWORD=pass
