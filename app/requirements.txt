@@ -1,0 +1,12 @@
+fastapi
+celery
+uvicorn
+psycopg2-binary
+sqlmodel
+pydantic-settings
+redis
+pandas
+pyarrow
+httpx
+pytest
+pytest-celery
