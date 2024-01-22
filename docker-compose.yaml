@@ -38,6 +38,10 @@ services:
     environment:
       - FROM_EMAIL=${FROM_EMAIL}
       - FROM_EMAIL_PASSWORD=${FROM_EMAIL_PASSWORD}
+      - API_USERNAME=${API_USERNAME}
+      - API_PASSWORD=${API_PASSWORD}
+      - DATABASE_URI=${DATABASE_URI}
+      - ENV=${ENV}
     volumes:
       - ./data/reports:/reports
   
@@ -47,6 +51,11 @@ services:
     depends_on:
       - app
       - redis
+    environment:
+      - API_USERNAME=${API_USERNAME}
+      - API_PASSWORD=${API_PASSWORD}
+      - DATABASE_URI=${DATABASE_URI}
+      - ENV=${ENV}
 
 volumes:
   postgres_data:
