@@ -10,11 +10,19 @@ A FastAPI application with RESTful API endpoints for managing library operations
 
 ### application
 
-After executing below command you can navigate to http://localhost:8080/ to access the application docs and try endpoints yourself.
+- first source environment variables from the `.env`, (`.env` file provided in this repository is just an example, please change it according to your needs)
 
-```bash
-docker-compose build && docker-compose up -d
-```
+    `source .env`
+
+- build the docker images
+
+    `docker-compose build`
+
+- run the dokcer containers
+
+    `docker-compose up -d`
+
+- After executing above commands you can navigate to http://localhost:8080/ to access the application docs and try endpoints yourself.
 
 ### tests
 
