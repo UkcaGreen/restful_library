@@ -20,7 +20,6 @@ def authent(
 def check_basic_auth_creds(
     credentials: HTTPBasicCredentials = Depends(basic_auth),
 ):
-    
     if not credentials:
         return False
 

@@ -17,7 +17,9 @@ def create_book(book: BookCreate, db: Session = Depends(get_session)) -> Book:
     return book
 
 
-def read_books(offset: int = 0, limit: int = 20, db: Session = Depends(get_session)) -> Sequence[Book]:
+def read_books(
+    offset: int = 0, limit: int = 20, db: Session = Depends(get_session)
+) -> Sequence[Book]:
     books = db.exec(select(Book).offset(offset).limit(limit)).all()
     return books
 
@@ -32,7 +34,9 @@ def read_book(book_id: int, db: Session = Depends(get_session)) -> Book:
     return book
 
 
-def update_book(book_id: int, book: BookUpdate, db: Session = Depends(get_session)) -> Book:
+def update_book(
+    book_id: int, book: BookUpdate, db: Session = Depends(get_session)
+) -> Book:
     book_to_update = db.get(Book, book_id)
     if not book_to_update:
         raise HTTPException(
@@ -63,14 +67,22 @@ def delete_book(book_id: int, db: Session = Depends(get_session)) -> dict:
     return {"ok": True}
 
 
-def read_checked_out_books(offset: int = 0, limit: int = 20, db: Session = Depends(get_session)) -> Sequence[Book]:
-    statement = select(Checkout, Book).where(Checkout.book_id == Book.id).where(Checkout.return_date == None)
+def read_checked_out_books(
+    offset: int = 0, limit: int = 20, db: Session = Depends(get_session)
+) -> Sequence[Book]:
+    statement = (
+        select(Checkout, Book)
+        .where(Checkout.book_id == Book.id)
+        .where(Checkout.return_date == None)
+    )
     results = db.exec(statement)
     books = [book for checkout, book in results]
     return books
 
 
-def read_over_due_books(offset: int = 0, limit: int = 20, db: Session = Depends(get_session)) -> Sequence[Book]:
+def read_over_due_books(
+    offset: int = 0, limit: int = 20, db: Session = Depends(get_session)
+) -> Sequence[Book]:
     statement = (
         select(Checkout, Book)
         .where(Checkout.book_id == Book.id)

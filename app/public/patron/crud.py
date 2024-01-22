@@ -15,7 +15,9 @@ def create_patron(patron: PatronCreate, db: Session = Depends(get_session)) -> P
     return patron
 
 
-def read_patrons(offset: int = 0, limit: int = 20, db: Session = Depends(get_session)) -> Sequence[Patron]:
+def read_patrons(
+    offset: int = 0, limit: int = 20, db: Session = Depends(get_session)
+) -> Sequence[Patron]:
     patrons = db.exec(select(Patron).offset(offset).limit(limit)).all()
     return patrons
 
@@ -30,7 +32,9 @@ def read_patron(patron_id: int, db: Session = Depends(get_session)) -> Patron:
     return patron
 
 
-def update_patron(patron_id: int, patron: PatronUpdate, db: Session = Depends(get_session)) -> Patron:
+def update_patron(
+    patron_id: int, patron: PatronUpdate, db: Session = Depends(get_session)
+) -> Patron:
     patron_to_update = db.get(Patron, patron_id)
     if not patron_to_update:
         raise HTTPException(

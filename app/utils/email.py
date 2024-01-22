@@ -5,13 +5,12 @@ PORT = 587
 
 
 def send_email(
-    title: str, 
-    body:  str, 
+    title: str,
+    body: str,
     to_email: str,
     from_email: str,
     password: str,
 ):
-    
     message = f"""Subject: {title}
 
     {body}

@@ -34,4 +34,5 @@ def create_app(settings: Settings):
 
     return app
 
+
 api = create_app(settings)

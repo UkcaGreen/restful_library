@@ -13,10 +13,10 @@ class Checkout(CheckoutBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
 
     patron_id: int = Field(default=None, foreign_key="patron.id")
-    patron: "Patron" = Relationship(back_populates="checkouts") # type: ignore
+    patron: "Patron" = Relationship(back_populates="checkouts")  # type: ignore
 
     book_id: int = Field(default=None, foreign_key="book.id")
-    book: "Book" = Relationship(back_populates="checkouts") # type: ignore
+    book: "Book" = Relationship(back_populates="checkouts")  # type: ignore
 
 
 class CheckoutCreate(CheckoutBase):

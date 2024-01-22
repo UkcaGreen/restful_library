@@ -34,7 +34,9 @@ def get_a_patron(patron_id: int, db: Session = Depends(get_session)):
 
 
 @router.patch("/{patron_id}", response_model=PatronRead)
-def update_a_patron(patron_id: int, patron: PatronUpdate, db: Session = Depends(get_session)):
+def update_a_patron(
+    patron_id: int, patron: PatronUpdate, db: Session = Depends(get_session)
+):
     return update_patron(patron_id=patron_id, patron=patron, db=db)
 
 

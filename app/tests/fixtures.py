@@ -7,7 +7,8 @@ from auth import authent
 from database import get_session
 import pytest
 
-@pytest.fixture(name="session")  
+
+@pytest.fixture(name="session")
 def session_fixture():
     from public.book.models import Book
     from public.patron.models import Patron
@@ -20,16 +21,18 @@ def session_fixture():
     with Session(engine) as session:
         yield session
 
-@pytest.fixture(name="authenticated_client")  
-def authenticated_client_fixture(session: Session):  
-    def get_session_override():  
+
+@pytest.fixture(name="authenticated_client")
+def authenticated_client_fixture(session: Session):
+    def get_session_override():
         return session
+
     def skip_auth():
         return True
-    
-    api.dependency_overrides[authent] = skip_auth
-    api.dependency_overrides[get_session] = get_session_override  
 
-    client = TestClient(api)  
-    yield client  
+    api.dependency_overrides[authent] = skip_auth
+    api.dependency_overrides[get_session] = get_session_override
+
+    client = TestClient(api)
+    yield client
     api.dependency_overrides.clear()

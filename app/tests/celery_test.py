@@ -11,18 +11,17 @@ import os
 
 @pytest.fixture(name="patched_session")
 def patched_session(mocker, session: Session):
-    def get_session_override():  
+    def get_session_override():
         yield session
 
-    mocker.patch('database.create_db_and_tables', return_value=True)
-    mocker.patch('database.get_session', get_session_override)
+    mocker.patch("database.create_db_and_tables", return_value=True)
+    mocker.patch("database.get_session", get_session_override)
 
     return session
-    
+
 
 def test_create_weekly_report(populate_checkout, mocker, patched_session: Session):
-
-    mocker.patch('pandas.DataFrame.to_csv', return_value=None)
+    mocker.patch("pandas.DataFrame.to_csv", return_value=None)
 
     from celery_tasks import create_weekly_report
 
@@ -31,13 +30,12 @@ def test_create_weekly_report(populate_checkout, mocker, patched_session: Sessio
     assert len(records) == 2
 
 
-def test_send_reminder_emails_for_overdue_books(populate_checkout, patched_session: Session):
-
+def test_send_reminder_emails_for_overdue_books(
+    populate_checkout, patched_session: Session
+):
     from celery_tasks import send_reminder_emails_for_overdue_books
 
     os.environ["FROM_EMAIL"] = "library_case_study@outlook.com"
     os.environ["FROM_EMAIL_PASSWORD"] = "XQXy=heq)_&3rGk"
 
     records = send_reminder_emails_for_overdue_books()
-
-    

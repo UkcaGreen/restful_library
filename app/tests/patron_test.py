@@ -2,30 +2,32 @@ from tests.fixtures import session_fixture, authenticated_client_fixture
 from fastapi.testclient import TestClient
 import pytest
 
+
 @pytest.fixture(name="populate_patron")
 def populate_patron_fixture(authenticated_client: TestClient):
-
     authenticated_client.post(
-        "/patrons/", json={
+        "/patrons/",
+        json={
             "username": "Ali Yılmaz",
             "email": "library_case_study@outlook.com",
-        }
+        },
     )
     authenticated_client.post(
-        "/patrons/", json={
+        "/patrons/",
+        json={
             "username": "Veli Özcan",
             "email": "library_case_study@outlook.com",
-        }
+        },
     )
 
 
 def test_create_patron(authenticated_client: TestClient, populate_patron):
-
     response = authenticated_client.post(
-        "/patrons/", json={
+        "/patrons/",
+        json={
             "username": "Ayşe Bakar",
             "email": "library_case_study@outlook.com",
-        }
+        },
     )
     data = response.json()
 
@@ -35,11 +37,11 @@ def test_create_patron(authenticated_client: TestClient, populate_patron):
 
 
 def test_update_patron(authenticated_client: TestClient, populate_patron):
-
     response = authenticated_client.patch(
-        f"/patrons/{1}", json={
+        f"/patrons/{1}",
+        json={
             "username": "Ali Yılar",
-        }
+        },
     )
 
     data = response.json()
@@ -53,7 +55,6 @@ def test_update_patron(authenticated_client: TestClient, populate_patron):
 
 
 def test_get_patron(authenticated_client: TestClient, populate_patron):
-
     response = authenticated_client.get(f"/patrons/{1}")
 
     data = response.json()
@@ -65,7 +66,6 @@ def test_get_patron(authenticated_client: TestClient, populate_patron):
 
 
 def test_get_patrons(authenticated_client: TestClient, populate_patron):
-
     response = authenticated_client.get(f"/patrons/")
 
     data = response.json()
@@ -75,7 +75,6 @@ def test_get_patrons(authenticated_client: TestClient, populate_patron):
 
 
 def test_delete_patron(authenticated_client: TestClient, populate_patron):
-
     response = authenticated_client.delete(f"/patrons/{1}")
 
     data = response.json()

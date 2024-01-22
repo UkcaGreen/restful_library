@@ -10,8 +10,8 @@ class BookBase(SQLModel):
 
 class Book(BookBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
-    
-    checkouts: list["Checkout"] = Relationship(back_populates="book") # type: ignore
+
+    checkouts: list["Checkout"] = Relationship(back_populates="book")  # type: ignore
 
 
 class BookCreate(BookBase):

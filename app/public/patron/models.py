@@ -2,6 +2,7 @@ from sqlmodel import Field, Relationship, SQLModel
 
 from public.book.models import Book
 
+
 class PatronBase(SQLModel):
     username: str
     email: str
@@ -10,7 +11,7 @@ class PatronBase(SQLModel):
 class Patron(PatronBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
 
-    checkouts: list["Checkout"] = Relationship(back_populates="patron") # type: ignore
+    checkouts: list["Checkout"] = Relationship(back_populates="patron")  # type: ignore
 
 
 class PatronCreate(PatronBase):
@@ -21,7 +22,7 @@ class PatronRead(PatronBase):
     id: int
     username: str | None = None
     email: str | None = None
-    
+
     books: list | None = None
 
 

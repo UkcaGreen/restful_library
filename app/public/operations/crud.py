@@ -10,8 +10,9 @@ from public.patron.crud import read_patron
 from datetime import datetime
 
 
-def checkout_a_book(checkout: CheckoutCreate, db: Session = Depends(get_session)) -> Checkout:
-
+def checkout_a_book(
+    checkout: CheckoutCreate, db: Session = Depends(get_session)
+) -> Checkout:
     # check if both book and patron exists
     read_book(checkout.book_id, db)
     read_patron(checkout.patron_id, db)
@@ -35,8 +36,10 @@ def checkout_a_book(checkout: CheckoutCreate, db: Session = Depends(get_session)
     db.refresh(checkout)
     return checkout
 
-def return_a_book(return_details: CheckoutReturn, db: Session = Depends(get_session)) -> Checkout:
-    
+
+def return_a_book(
+    return_details: CheckoutReturn, db: Session = Depends(get_session)
+) -> Checkout:
     # check if both book and patron exists
     read_book(return_details.book_id, db)
     read_patron(return_details.patron_id, db)
